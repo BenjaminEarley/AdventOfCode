@@ -3,25 +3,29 @@ package `2018`
 fun main() {
     println(
         d2p1(
-"""abcdef
-bababc
-abbcde
-abcccd
-aabcdd
-abcdee
-ababab"""
+            """
+                abcdef
+                bababc
+                abbcde
+                abcccd
+                aabcdd
+                abcdee
+                ababab
+            """.trimIndent()
         )
     )
 
     println(
         d2p2(
-"""abcde
-fghij
-klmno
-pqrst
-fguij
-axcye
-wvxyz"""
+            """
+                abcde
+                fghij
+                klmno
+                pqrst
+                fguij
+                axcye
+                wvxyz
+            """.trimIndent()
         )
     )
 }
