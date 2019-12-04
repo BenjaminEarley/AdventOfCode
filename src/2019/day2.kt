@@ -24,7 +24,7 @@ private fun List<Int>.part2() {
             val output = runIntcode(noun, verb)
             if (output == 19690720) {
                 println("Year 2019 Day 2 Part 2: ${100 * noun + verb}")
-                break
+                return
             }
         }
     }
@@ -35,25 +35,25 @@ private fun List<Int>.runIntcode(noun: Int, verb: Int): Int {
     memory[1] = noun
     memory[2] = verb
     var programPosition = 0
-    program@ while (true) {
+    while (true) {
         when (val instruction = readInstruction(programPosition)) {
-            is Mutate -> instruction(memory)
-            Halt -> break@program
+            is Operation -> {
+                instruction(memory)
+                programPosition += Operation.SIZE
+            }
+            Halt -> return memory[0]
         }
-        programPosition += Instruction.SIZE
     }
-    return memory[0]
 }
 
-private sealed class Instruction {
+private sealed class Instruction
+private data class Operation(private val address1: Int, private val address2: Int, private val address3: Int, private val operation: (Int, Int) -> Int) : Instruction() {
+    operator fun invoke(input: MutableList<Int>) {
+        input[address3] = operation(input[address1], input[address2])
+    }
+
     companion object {
         const val SIZE = 4
-    }
-}
-
-private data class Mutate(private val leftIndex: Int, private val rightIndex: Int, private val resultIndex: Int, private val operation: (Int, Int) -> Int) : Instruction() {
-    operator fun invoke(input: MutableList<Int>) {
-        input[resultIndex] = operation(input[leftIndex], input[rightIndex])
     }
 }
 
@@ -61,8 +61,8 @@ private object Halt : Instruction()
 
 private fun List<Int>.readInstruction(startPosition: Int): Instruction {
     return when (get(startPosition)) {
-        ADD.code -> Mutate(get(startPosition + 1), get(startPosition + 2), get(startPosition + 3)) { l, r -> l + r }
-        MULTIPLY.code -> Mutate(get(startPosition + 1), get(startPosition + 2), get(startPosition + 3)) { l, r -> l * r }
+        ADD.code -> Operation(get(startPosition + 1), get(startPosition + 2), get(startPosition + 3)) { l, r -> l + r }
+        MULTIPLY.code -> Operation(get(startPosition + 1), get(startPosition + 2), get(startPosition + 3)) { l, r -> l * r }
         HALT.code -> Halt
         else -> throw UnsupportedOperationException()
     }
