@@ -5,29 +5,27 @@ import java.lang.UnsupportedOperationException
 import `2019`.OpCode.HALT
 import `2019`.OpCode.ADD
 import `2019`.OpCode.MULTIPLY
+import java.lang.Exception
 
 fun main() {
     readInput(year = 2019, day = 2).first().split(',').map { it.toInt() }.apply {
-        part1()
-        part2()
+        println("Year 2019 Day 2 Part 1: ${part1()}")
+        println("Year 2019 Day 2 Part 2: ${part2()}")
     }
 }
 
-private fun List<Int>.part1() {
-    val output = runIntcode(noun = 12, verb = 2)
-    println("Year 2019 Day 2 Part 1: $output")
-}
+private fun List<Int>.part1() = runIntcode(noun = 12, verb = 2)
 
-private fun List<Int>.part2() {
+private fun List<Int>.part2(): Int {
     for (noun in 0..99) {
         for (verb in 0..99) {
             val output = runIntcode(noun, verb)
             if (output == 19690720) {
-                println("Year 2019 Day 2 Part 2: ${100 * noun + verb}")
-                return
+                return 100 * noun + verb
             }
         }
     }
+    throw Exception("Unable To Find Output Matching 19690720")
 }
 
 private fun List<Int>.runIntcode(noun: Int, verb: Int): Int {
