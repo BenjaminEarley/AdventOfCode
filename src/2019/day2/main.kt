@@ -8,10 +8,12 @@ import `2019`.day2.OpCode.MULTIPLY
 import java.lang.Exception
 
 fun main() {
-    readInput(year = 2019, day = 2).first().split(',').map { it.toInt() }.apply {
-        println("Year 2019 Day 2 Part 1: ${part1()}")
-        println("Year 2019 Day 2 Part 2: ${part2()}")
-    }
+    readInput(year = 2019, day = 2).first().split(',')
+            .map(String::toInt)
+            .run {
+                println("Year 2019 Day 2 Part 1: ${part1()}")
+                println("Year 2019 Day 2 Part 2: ${part2()}")
+            }
 }
 
 private fun List<Int>.part1() = runIntcode(noun = 12, verb = 2)

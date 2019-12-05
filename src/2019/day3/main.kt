@@ -19,7 +19,7 @@ fun main() {
                     Operation(direction, distance)
                 }
             }.let { Pair(it[0], it[1]) }
-            .apply {
+            .run {
                 println("Year 2019 Day 3 Part 1: ${part1()}")
                 println("Year 2019 Day 3 Part 2: ${part2()}")
             }

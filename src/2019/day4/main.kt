@@ -9,7 +9,7 @@ fun main() {
                 val range = it.split('-').map(String::toInt)
                 range[0]..range[1]
             }
-            .apply {
+            .run {
                 println("Year 2019 Day 4 Part 1: ${part1()}")
                 println("Year 2019 Day 4 Part 2: ${part2()}")
             }
