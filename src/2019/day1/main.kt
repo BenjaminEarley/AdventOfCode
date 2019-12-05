@@ -1,4 +1,4 @@
-package `2019`
+package `2019`.day1
 
 import util.readInput
 

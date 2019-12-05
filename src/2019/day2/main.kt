@@ -1,10 +1,10 @@
-package `2019`
+package `2019`.day2
 
 import util.readInput
 import java.lang.UnsupportedOperationException
-import `2019`.OpCode.HALT
-import `2019`.OpCode.ADD
-import `2019`.OpCode.MULTIPLY
+import `2019`.day2.OpCode.HALT
+import `2019`.day2.OpCode.ADD
+import `2019`.day2.OpCode.MULTIPLY
 import java.lang.Exception
 
 fun main() {
