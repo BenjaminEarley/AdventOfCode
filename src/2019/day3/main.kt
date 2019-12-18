@@ -10,6 +10,7 @@ private typealias Wire = List<Point>
 private val STARTING_POINT = Point(0, 0)
 
 fun main() {
+    Result
     readInput(year = 2019, day = 3)
             .map { it.split(",") }
             .map { wires ->
@@ -41,11 +42,10 @@ private fun BothWireOperations.part2(): String {
 
     val wireIntersections = (firstWire intersect secondWire).drop(1)
 
-    var shortestPathsLength: Int = Int.MAX_VALUE
-    wireIntersections.forEach { intersection ->
-        val pathsLength = firstWire.stepsTo(intersection) + secondWire.stepsTo(intersection)
-        if (shortestPathsLength > pathsLength) shortestPathsLength = pathsLength
-    }
+    val shortestPathsLength = wireIntersections
+            .map { intersection -> firstWire.stepsTo(intersection) + secondWire.stepsTo(intersection) }
+            .min()
+
     return shortestPathsLength.toString()
 }
 
